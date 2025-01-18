@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
       - name: finance-service
-        image: "ayman909/finance-service:v2"  # Replace with your actual gateway image
+        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/finance-service:9"
         ports:
         - containerPort: 8080  # Port exposed by your gateway container
       initContainers:
       - name: init-eureka
-        image: busybox
+        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/finance-service:9"
         command: ['sh', '-c', 'until nslookup eureka-server.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
       

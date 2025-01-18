@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
       - name: client-service
-        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:7"
+        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:8"
         ports:
         - containerPort: 8080  # Port exposed by your gateway container
       initContainers:
       - name: init-eureka
-        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:7"
+        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:8"
         command: ['sh', '-c', 'until nslookup eureka-server.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
       - name: init-db
-        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:7"
+        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:8"
         command: ['sh', '-c', 'until nslookup client-db.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']

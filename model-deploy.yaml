@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ml-model
-        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/ml-model"  # Replace with your actual gateway image
+        image: "ayman909/model"  # Replace with your actual gateway image
         ports:
         - containerPort: 5000  # Port exposed by your gateway container
       

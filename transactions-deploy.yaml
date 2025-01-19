@@ -21,8 +21,8 @@ spec:
         - containerPort: 8080  # Port exposed by your gateway container
       initContainers:
       - name: init-eureka
-        image: busybox
+        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/transactions-service:5"
         command: ['sh', '-c', 'until nslookup eureka-server.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
       - name: init-db
-        image: busybox
+        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/transactions-service:5"
         command: ['sh', '-c', 'until nslookup transactions-db.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']

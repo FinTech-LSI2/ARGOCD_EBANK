@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: client-service
   labels:
@@ -15,14 +15,41 @@ spec:
         app: client-service
     spec:
       containers:
-      - name: client-service
-        image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:8"
-        ports:
-        - containerPort: 8080  # Port exposed by your gateway container
+        - name: client-service
+          image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:8"
+          ports:
+            - containerPort: 8080
       initContainers:
-      - name: init-eureka
-        image: busybox
-        command: ['sh', '-c', 'until nslookup eureka-server.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
-      - name: init-db
-        image: busybox
-        command: ['sh', '-c', 'until nslookup client-db.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
+        - name: init-eureka
+          image: busybox
+          command:
+            - sh
+            - '-c'
+            - >
+              until nslookup eureka-server.default.svc.cluster.local;
+              do echo waiting for Eureka; sleep 2; done;
+        - name: init-db
+          image: busybox
+          command:
+            - sh
+            - '-c'
+            - >
+              until nslookup client-db.default.svc.cluster.local;
+              do echo waiting for database; sleep 2; done;
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {duration: 60s}
+        - analysis:
+            templates:
+              - templateName: success-rate
+        - setWeight: 50
+        - pause: {duration: 60s}
+        - analysis:
+            templates:
+              - templateName: success-rate
+        - setWeight: 100
+      analysis:
+        templates:
+          - templateName: success-rate

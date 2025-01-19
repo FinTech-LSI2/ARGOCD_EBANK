@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: client-service
-          image: "ayman909/client-service:v2"
+          image: "ayman909/client-service:v1234"
           ports:
             - containerPort: 8080
       initContainers:

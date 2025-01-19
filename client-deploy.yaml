@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: client-service
-          image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:8"
+          image: "ayman909/client-service:v2"
           ports:
             - containerPort: 8080
       initContainers:

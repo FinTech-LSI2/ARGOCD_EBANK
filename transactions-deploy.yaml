@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name:  transactions-service
-        image: "ayman909/transactions-service:12345"  # Replace with your actual gateway image
+        image: "ayman909/transactions-service:v2"  # Replace with your actual gateway image
         ports:
         - containerPort: 8080  # Port exposed by your gateway container
       initContainers:

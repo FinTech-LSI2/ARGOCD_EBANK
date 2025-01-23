@@ -21,10 +21,10 @@ spec:
             - containerPort: 8080
       initContainers:
         - name: init-eureka
-          image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:12"
+          image: busybox
           command: ['sh', '-c', 'until nslookup eureka-server.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
         - name: init-db
-          image: "390403864598.dkr.ecr.us-east-1.amazonaws.com/client-service:12"
+          image: busybox
           command: ['sh', '-c', 'until nslookup client-db.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
                
   strategy:

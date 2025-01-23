@@ -25,7 +25,7 @@ spec:
           command: ['sh', '-c', 'until nslookup eureka-server.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
         - name: init-db
           image: busybox
-          command: ['sh', '-c', 'until nslookup client-db.default.svc.cluster.local; do echo waiting for Eureka; sleep 2; done;']
+          command: ['sh', '-c', 'until nslookup client-db.default.svc.cluster.local; do echo waiting for Eureka; sleep 3; done;']
                
   strategy:
     canary:
